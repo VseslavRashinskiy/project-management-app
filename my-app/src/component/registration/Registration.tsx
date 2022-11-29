@@ -17,7 +17,7 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { __baseUrl__ } from '../constant';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import login from '../assets/img/login.png';
+import login from '../assets/image/login.png';
 
 type CreateUser = {
   name: FormDataEntryValue | null;

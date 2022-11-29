@@ -12,12 +12,19 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <BackupTableIcon />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            App
+            <RouterLink
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+              to={`/`}
+            >
+              <BackupTableIcon />
+              App
+            </RouterLink>
           </Typography>
           <Button color="inherit">
-            {' '}
             <RouterLink
               style={{
                 textDecoration: 'none',
@@ -28,7 +35,17 @@ export default function Header() {
               Log In
             </RouterLink>
           </Button>
-          <Button color="inherit">Sign Up</Button>
+          <Button color="inherit">
+            <RouterLink
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+              to={`register`}
+            >
+              Sign Up
+            </RouterLink>
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
