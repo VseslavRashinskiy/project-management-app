@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import BackupTableIcon from '@mui/icons-material/BackupTable';
+import { Link, Link as RouterLink } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -15,7 +16,18 @@ export default function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             App
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">
+            {' '}
+            <RouterLink
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+              to={`login`}
+            >
+              Log In
+            </RouterLink>
+          </Button>
           <Button color="inherit">Sign Up</Button>
         </Toolbar>
       </AppBar>
