@@ -6,10 +6,10 @@ import { Box } from '@mui/system';
 import axios from 'axios';
 import { __baseUrl__ } from '../constant';
 import login from '../assets/image/login.png';
-// import { useUser } from '../UserProvider';
+import { useUser } from '../UserProvider';
 
 type SignUser = {
-  email: FormDataEntryValue | null;
+  login: FormDataEntryValue | null;
   password: FormDataEntryValue | null;
 };
 
@@ -22,29 +22,28 @@ type ResponseLoginUser = {
 };
 
 export const signUser = async (user: SignUser) => {
-  const response = await axios.post<ResponseLoginUser>(__baseUrl__ + 'signin', user);
+  const response = await axios.post<ResponseLoginUser>(__baseUrl__ + 'auth/signin', user);
   localStorage.setItem('tokenUser', JSON.stringify(response.data.token));
-  localStorage.setItem('idUser', JSON.stringify(response.data.userId));
   return response.data;
 };
 
-export const SignIn = () => {
-  // const navigate = useNavigate();
-  // const [, setUser] = useUser();
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const data = new FormData(e.currentTarget);
-  //   const response = await signUser({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  //   setUser({
-  //     id: response.userId,
-  //     name: response.name,
-  //     email: data.get('email') as string,
-  //   });
-  //   navigate(-1);
-  // };
+export const LogIn = () => {
+  const navigate = useNavigate();
+  const [, setUser] = useUser();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const response = await signUser({
+      login: data.get('email'),
+      password: data.get('password'),
+    });
+    setUser({
+      id: response.userId,
+      name: response.name,
+      email: data.get('email') as string,
+    });
+    navigate(-1);
+  };
 
   return (
     <Grid container component="main" sx={{ height: 'calc(100vh - 65px)', maxWidth: '1900px' }}>
@@ -80,7 +79,7 @@ export const SignIn = () => {
           </Typography>
           <Box
             component="form"
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           >
             <TextField

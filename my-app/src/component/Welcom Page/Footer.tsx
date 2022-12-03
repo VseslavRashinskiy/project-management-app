@@ -9,7 +9,14 @@ const dateTeam = [
 
 export const Footer = () => {
   return (
-    <Grid container alignItems=" center" justifyContent="space-between" sx={{ p: 2 }}>
+    <Grid
+      container
+      alignItems=" center"
+      justifyContent="space-between"
+      sx={{ p: 2 }}
+      position="absolute"
+      bottom="0"
+    >
       <Grid item>
         <img src={rsSchool} alt="rsSchool" />
       </Grid>
