@@ -7,9 +7,9 @@ type UserProviderProps = {
 };
 
 export type User = {
-  id: string;
+  _id: string;
   name: string;
-  email: string;
+  login: string;
 };
 
 type UserContextValue = [
@@ -17,7 +17,7 @@ type UserContextValue = [
   setUser: React.Dispatch<React.SetStateAction<User | null>>
 ];
 
-const getUserById = async (id: string) => {
+export const getUserById = async (id: string) => {
   const response = await axiosApiInstance.get<Omit<User, 'id'>>(__baseUrl__ + 'users/' + id);
   return response.data;
 };
@@ -30,7 +30,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const userIdFromStorage = localStorage.getItem('idUser');
     if (userIdFromStorage) {
       getUserById(userIdFromStorage.slice(1, -1)).then((result) => {
-        setUser({ ...result, id: userIdFromStorage.slice(1, -1) });
+        setUser({ ...result, _id: userIdFromStorage.slice(1, -1) });
       });
     }
   }, []);

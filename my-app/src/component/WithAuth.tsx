@@ -6,7 +6,6 @@ type WithAuthParams<T> = (props: T) => JSX.Element;
 
 const withAuth = <PropsType,>(Component: WithAuthParams<PropsType>) => {
   return (props: PropsType & {}) => {
-    console.log(props);
     const [user] = useUser();
     if (!user) return null;
     return <Component {...props} />;

@@ -3,10 +3,11 @@ import { Lock } from '@mui/icons-material';
 import { Avatar, Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/system';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { __baseUrl__ } from '../constant';
 import login from '../assets/image/login.png';
-import { useUser } from '../UserProvider';
+import { useState, useEffect } from 'react';
+import { getUserById, useUser } from '../UserProvider';
 
 type SignUser = {
   login: FormDataEntryValue | null;
@@ -14,11 +15,7 @@ type SignUser = {
 };
 
 type ResponseLoginUser = {
-  message: string;
   token: string;
-  userId: string;
-  refreshToken: string;
-  name: string;
 };
 
 export const signUser = async (user: SignUser) => {
@@ -29,20 +26,30 @@ export const signUser = async (user: SignUser) => {
 
 export const LogIn = () => {
   const navigate = useNavigate();
-  const [, setUser] = useUser();
+  const [error, setError] = useState<string | null>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const response = await signUser({
+    signUser({
       login: data.get('email'),
       password: data.get('password'),
-    });
-    setUser({
-      id: response.userId,
-      name: response.name,
-      email: data.get('email') as string,
-    });
-    navigate('/');
+    })
+      .then(() => {
+        navigate('/');
+        window.location.reload();
+      })
+      .catch((e) => {
+        if (axios.isAxiosError(e)) {
+          const error = e as AxiosError<Error>;
+          // Error 409
+          if (true) {
+            setError(error.response?.data.message || null);
+          } else {
+            // Error 422
+            setError(error.response?.data.message || null);
+          }
+        }
+      });
   };
 
   return (
