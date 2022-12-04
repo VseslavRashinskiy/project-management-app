@@ -42,7 +42,7 @@ export const LogIn = () => {
       name: response.name,
       email: data.get('email') as string,
     });
-    navigate(-1);
+    navigate('/');
   };
 
   return (

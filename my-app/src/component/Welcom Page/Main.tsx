@@ -7,6 +7,7 @@ import { Registration } from '../registration/Registration';
 import { LogIn } from '../registration/LogIn';
 import { Typography } from '@mui/material';
 import NotFound from 'component/NotFound';
+import { ProfileUser } from '../profile/ProfileUser';
 
 const Placeholder = () => (
   <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -39,6 +40,7 @@ export const Main = () => {
         <Route path="/" element={<Placeholder />} />
         <Route path="login" element={<LogIn />} />
         <Route path="register" element={<Registration />} />
+        <Route path="profile" element={<ProfileUser />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Box>

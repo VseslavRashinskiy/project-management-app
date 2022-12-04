@@ -1,19 +1,47 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import {
+  AppBar,
+  Button,
+  Box,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import BackupTableIcon from '@mui/icons-material/BackupTable';
-import { Link as RouterLink } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, Link as RouterLink } from 'react-router-dom';
 import { Main } from './Main';
 import { Footer } from './Footer';
 import { useUser } from '../UserProvider';
+import withAuth from '../WithAuth';
+
+type NavMenuItemProps = {
+  path: string;
+  name: string;
+};
+
+const NavMenuItem = ({ path, name }: NavMenuItemProps) => (
+  <ListItemButton component={Link} to={path}>
+    <ListItemText primary={name} />
+  </ListItemButton>
+);
+
+const PrivateNavMenuItem = withAuth(NavMenuItem);
 
 export default function Header() {
   const [user] = useUser();
-  const [open, setOpen] = useState(false);
+
+  const data = [{ name: 'Create new board', path: '/statistic', isPrivate: true }];
+
+  const getList = () => (
+    <>
+      {data.map((item) => (
+        <div key={item.name}>
+          {item.isPrivate ? <PrivateNavMenuItem path={item.path} name={item.name} /> : <></>}
+        </div>
+      ))}
+    </>
+  );
 
   return (
     <div style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'column' }}>
@@ -32,6 +60,7 @@ export default function Header() {
                 App
               </RouterLink>
             </Typography>
+            {getList()}
             {user ? (
               <Button
                 sx={{

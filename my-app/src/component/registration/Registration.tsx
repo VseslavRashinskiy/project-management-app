@@ -3,13 +3,11 @@ import { Lock } from '@mui/icons-material';
 import {
   Avatar,
   Button,
-  createTheme,
   CssBaseline,
   Grid,
   Link,
   Paper,
   TextField,
-  ThemeProvider,
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
@@ -31,8 +29,7 @@ type ResponseLoginUser = {
   _id: string;
 };
 
-type Error417 = string;
-type Error422 = { error: { errors: { message: string }[] } };
+type Error = { message: string; statusCode: number };
 
 export const createUser = async (user: CreateUser) => {
   const response = await axios.post<ResponseLoginUser>(__baseUrl__ + 'auth/signup', user);
@@ -51,16 +48,19 @@ export const Registration = () => {
       login: data.get('email'),
       password: data.get('password'),
     })
-      .then(() => navigate('/'))
+      .then(() => {
+        alert('Регистрация прошла успешно');
+        navigate('/login');
+      })
       .catch((e) => {
         if (axios.isAxiosError(e)) {
-          const error = e as AxiosError<Error417 | Error422>;
-          // Error 417
-          if (typeof error.response?.data === 'string') {
-            setError(error.response?.data || null);
+          const error = e as AxiosError<Error>;
+          // Error 409
+          if (error.response?.data.statusCode === 409) {
+            setError(error.response?.data.message || null);
           } else {
             // Error 422
-            setError(error.response?.data.error.errors[0].message || null);
+            setError(error.response?.data.message || null);
           }
         }
       });
