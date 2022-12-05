@@ -23,6 +23,10 @@ export const mainState = [
     deleteProfileQ: 'Are you sure you want to delete?',
     signOut: 'Sign Out',
     update: 'Update',
+    desriptionMe:
+      "The boss of the project, a great progrmist, the guy is great! And what a sense of humor, it's amazing.",
+    team: 'Me',
+    titleMe: 'Vseslav Rashinskiy',
     name: 'Name',
     email: 'Email Address',
     password: 'Password',
@@ -33,9 +37,13 @@ export const mainState = [
       'App - это приложение для совместной работы над задачами. Наше приложение помогает повысить производительность труда благодаря своей широкой функциональности. Наслаждайтесь своей работой!',
     signUp: 'Зарегистрироваться',
     logIn: 'Войти',
+
     logErr: 'Неправильный логин или пароль',
     logQ: 'У вас нет учетной записи? Зарегистрируйтесь',
     notFound: 'Страница не найдена. Перейти',
+    titleMe: 'Всеслав Ращинский',
+    descriptionMe:
+      'Босс проекта, отличный прогрммист, парень просто супер! А какое чувство юмора, обалдеть можно.',
     home: 'Главная',
     regOk: 'Регистрация прошла успешно',
     regErr: 'Логин уже существует',
@@ -44,6 +52,7 @@ export const mainState = [
     editProfile: 'Редактировать профиль',
     profileUpdate: 'Обновление профиля',
     profileUpdateOk: 'Профиль был обновлен!',
+    team: 'Я',
     deleteProfile: 'Удалить профиль',
     deleteProfileQ: 'Вы уверены, что хотите удалить?',
     signOut: 'Выйти',

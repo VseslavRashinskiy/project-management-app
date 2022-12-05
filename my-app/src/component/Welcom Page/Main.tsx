@@ -9,6 +9,7 @@ import { Typography } from '@mui/material';
 import NotFound from 'component/NotFound';
 import { ProfileUser } from '../profile/ProfileUser';
 import { EditProfile } from 'component/profile/EditProfile';
+import { AboutUs } from './AboutUs';
 
 const Placeholder = ({ language }: Language) => (
   <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -21,6 +22,7 @@ const Placeholder = ({ language }: Language) => (
       </Typography>
     </div>
     <CardMedia component="img" image={mainImg} alt="main-img" />
+    <AboutUs language={language} />
   </Grid>
 );
 
