@@ -8,6 +8,7 @@ import { __baseUrl__ } from '../constant';
 import login from '../assets/image/login.png';
 import { useState, useEffect } from 'react';
 import { getUserById, useUser } from '../UserProvider';
+import { Error } from './Registration';
 
 type SignUser = {
   login: FormDataEntryValue | null;
@@ -41,11 +42,11 @@ export const LogIn = () => {
       .catch((e) => {
         if (axios.isAxiosError(e)) {
           const error = e as AxiosError<Error>;
-          // Error 409
-          if (true) {
-            setError(error.response?.data.message || null);
+          // Error 401
+          if (error.response?.data.statusCode === 401) {
+            setError('Incorrect login or password' || null);
           } else {
-            // Error 422
+            // Error 400
             setError(error.response?.data.message || null);
           }
         }
@@ -110,6 +111,7 @@ export const LogIn = () => {
               id="password"
               autoComplete="current-password"
             />
+            <Typography sx={{ color: 'red', mt: 1 }}>{error}</Typography>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>

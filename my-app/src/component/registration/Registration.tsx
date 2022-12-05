@@ -29,7 +29,7 @@ type ResponseLoginUser = {
   _id: string;
 };
 
-type Error = { message: string; statusCode: number };
+export type Error = { message: string; statusCode: number };
 
 export const createUser = async (user: CreateUser) => {
   const response = await axios.post<ResponseLoginUser>(__baseUrl__ + 'auth/signup', user);
@@ -59,7 +59,7 @@ export const Registration = () => {
           if (error.response?.data.statusCode === 409) {
             setError(error.response?.data.message || null);
           } else {
-            // Error 422
+            // Error 400
             setError(error.response?.data.message || null);
           }
         }

@@ -30,7 +30,6 @@ const PrivateNavMenuItem = withAuth(NavMenuItem);
 
 export default function Header() {
   const [user] = useUser();
-  console.log(user);
 
   const data = [{ name: 'Create new board', path: '/statistic', isPrivate: true }];
 
