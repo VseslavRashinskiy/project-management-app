@@ -10,7 +10,7 @@ export const mainState = [
     logIn: 'Log in',
     logErr: 'Incorrect login or password',
     logQ: "Don't have an account? Sign Up",
-    notFound: 'Page not found. Go',
+    notFound: '404 Page not found',
     home: 'Home',
     regOk: 'Registration was successful',
     regErr: 'Login already exist',
@@ -40,7 +40,7 @@ export const mainState = [
 
     logErr: 'Неправильный логин или пароль',
     logQ: 'У вас нет учетной записи? Зарегистрируйтесь',
-    notFound: 'Страница не найдена. Перейти',
+    notFound: '404 Страница не найдена',
     titleMe: 'Всеслав Ращинский',
     descriptionMe:
       'Босс проекта, отличный прогрммист, парень просто супер! А какое чувство юмора, обалдеть можно.',

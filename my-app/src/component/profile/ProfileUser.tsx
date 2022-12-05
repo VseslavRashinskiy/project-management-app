@@ -29,15 +29,15 @@ export const ProfileUser = ({ language }: Language) => {
   };
 
   return (
-    <Grid container component={Paper} justifyContent="space-between" alignItems="center">
-      <Grid item xs={4} md={4} display="flex" flexDirection="column" alignItems="center">
+    <div className="main__profile">
+      <div className="profile__item">
         <Avatar alt={user?.name} src={avatarOut} sx={{ width: '30%', height: '30%' }} />
         <Button onClick={exitProfile}>
           {' '}
           {language === 'EN' ? mainState[0].signOut : mainState[1].signOut}
         </Button>
-      </Grid>
-      <Grid item xs={4} md={4}>
+      </div>
+      <div className="profile__item">
         <Avatar alt={user?.name} src={avatarEdit} sx={{ width: '30%', height: '30%' }} />
         <Button>
           {' '}
@@ -51,14 +51,14 @@ export const ProfileUser = ({ language }: Language) => {
             {language === 'EN' ? mainState[0].editProfile : mainState[1].editProfile}
           </RouterLink>
         </Button>
-      </Grid>
-      <Grid item xs={4} md={4}>
+      </div>
+      <div className="profile__item">
         <Avatar alt={user?.name} src={avatarDelete} sx={{ width: '30%', height: '30%' }} />
         <Button onClick={deleteProfile}>
           {' '}
           {language === 'EN' ? mainState[0].deleteProfile : mainState[1].deleteProfile}
         </Button>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };

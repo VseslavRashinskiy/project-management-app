@@ -1,14 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import {
-  AppBar,
-  Button,
-  Box,
-  ListItemButton,
-  ListItemText,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Button, ListItemButton, ListItemText } from '@mui/material';
 import BackupTableIcon from '@mui/icons-material/BackupTable';
 import { Link, Link as RouterLink } from 'react-router-dom';
 import { Main } from './Main';
@@ -52,82 +44,48 @@ export default function Header() {
   );
 
   return (
-    <div style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'column' }}>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed">
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <RouterLink
-                style={{
-                  textDecoration: 'none',
-                  color: 'inherit',
-                }}
-                to={`/`}
-              >
-                <BackupTableIcon />
-                App
-              </RouterLink>
-            </Typography>
-            <Button
-              color="inherit"
-              onClick={() => {
-                if (localStorage.getItem('language') === 'EN') {
-                  localStorage.setItem('language', 'RU');
-                  setLanguage(localStorage.getItem('language') as string);
-                } else {
-                  localStorage.setItem('language', 'EN');
-                  setLanguage(localStorage.getItem('language') as string);
-                }
-              }}
-            >
-              {localStorage.getItem('language') ? language : 'RU'}
+    <div className="welcome">
+      <AppBar className="header">
+        <RouterLink to={`/`}>
+          <BackupTableIcon />
+          App
+        </RouterLink>
+        <div className="header__nav">
+          <Button
+            color="inherit"
+            onClick={() => {
+              if (localStorage.getItem('language') === 'EN') {
+                localStorage.setItem('language', 'RU');
+                setLanguage(localStorage.getItem('language') as string);
+              } else {
+                localStorage.setItem('language', 'EN');
+                setLanguage(localStorage.getItem('language') as string);
+              }
+            }}
+          >
+            {localStorage.getItem('language') ? language : 'RU'}
+          </Button>
+          {getList()}
+          {user ? (
+            <Button component={RouterLink} to="/profile">
+              {user.name}
             </Button>
-            {getList()}
-            {user ? (
-              <Button
-                sx={{
-                  fontSize: {
-                    lg: '1rem',
-                    md: '1rem',
-                    sm: '1rem',
-                    xs: 10,
-                  },
-                }}
-                color="inherit"
-                component={RouterLink}
-                to="/profile"
-              >
-                {user.name}
+          ) : (
+            <>
+              <Button>
+                <RouterLink to={`login`}>
+                  {language === 'EN' ? mainState[0].logIn : mainState[1].logIn}
+                </RouterLink>
               </Button>
-            ) : (
-              <>
-                <Button color="inherit">
-                  <RouterLink
-                    style={{
-                      textDecoration: 'none',
-                      color: 'inherit',
-                    }}
-                    to={`login`}
-                  >
-                    {language === 'EN' ? mainState[0].logIn : mainState[1].logIn}
-                  </RouterLink>
-                </Button>
-                <Button color="inherit">
-                  <RouterLink
-                    style={{
-                      textDecoration: 'none',
-                      color: 'inherit',
-                    }}
-                    to={`register`}
-                  >
-                    {language === 'EN' ? mainState[0].reg : mainState[1].reg}
-                  </RouterLink>
-                </Button>
-              </>
-            )}
-          </Toolbar>
-        </AppBar>
-      </Box>
+              <Button color="inherit">
+                <RouterLink to={`register`}>
+                  {language === 'EN' ? mainState[0].reg : mainState[1].reg}
+                </RouterLink>
+              </Button>
+            </>
+          )}
+        </div>
+      </AppBar>
       <Main language={language} />
       <Footer />
     </div>
