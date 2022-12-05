@@ -17,13 +17,13 @@ import { __baseUrl__ } from '../constant';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import login from '../assets/image/login.png';
 
-type CreateUser = {
+export type CreateUser = {
   name: FormDataEntryValue | null;
   login: FormDataEntryValue | null;
   password: FormDataEntryValue | null;
 };
 
-type ResponseLoginUser = {
+export type ResponseLoginUser = {
   name: string;
   login: string;
   _id: string;

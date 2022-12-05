@@ -1,49 +1,48 @@
 import React from 'react';
 import { Lock } from '@mui/icons-material';
-import { Avatar, Button, Grid, Link, TextField, Typography } from '@mui/material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Avatar, Button, CssBaseline, Grid, Paper, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import axios, { AxiosError } from 'axios';
-import { __baseUrl__ } from '../constant';
-import login from '../assets/image/login.png';
 import { useState } from 'react';
-import { Error } from './Registration';
+import { axiosApiInstance, userId, __baseUrl__ } from '../constant';
+import { useNavigate } from 'react-router-dom';
+import login from '../assets/image/login.png';
+import { useUser } from '../UserProvider';
+import { CreateUser, Error, ResponseLoginUser } from 'component/registration/Registration';
 
-type SignUser = {
-  login: FormDataEntryValue | null;
-  password: FormDataEntryValue | null;
+export const updateUser = async (newUser: CreateUser) => {
+  if (userId) {
+    const response = await axiosApiInstance.put<ResponseLoginUser>(
+      `${__baseUrl__}users/` + userId.slice(1, -1),
+      newUser
+    );
+    return response.data;
+  }
 };
 
-type ResponseLoginUser = {
-  token: string;
-};
-
-export const signUser = async (user: SignUser) => {
-  const response = await axios.post<ResponseLoginUser>(__baseUrl__ + 'auth/signin', user);
-  localStorage.setItem('tokenUser', JSON.stringify(response.data.token));
-  return response.data;
-};
-
-export const LogIn = () => {
-  const navigate = useNavigate();
+export const EditProfile = () => {
+  const [user] = useUser();
   const [error, setError] = useState<string | null>(null);
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    signUser({
+    updateUser({
+      name: data.get('name'),
       login: data.get('email'),
       password: data.get('password'),
     })
       .then(() => {
+        alert('Profile update');
         navigate('/');
         window.location.reload();
       })
       .catch((e) => {
         if (axios.isAxiosError(e)) {
           const error = e as AxiosError<Error>;
-          // Error 401
-          if (error.response?.data.statusCode === 401) {
-            setError('Incorrect login or password' || null);
+          // Error 409
+          if (error.response?.data.statusCode === 409) {
+            setError(error.response?.data.message || null);
           } else {
             // Error 400
             setError(error.response?.data.message || null);
@@ -51,9 +50,9 @@ export const LogIn = () => {
         }
       });
   };
-
   return (
     <Grid container component="main" sx={{ height: 'calc(100vh - 65px)', maxWidth: '1900px' }}>
+      <CssBaseline />
       <Grid
         item
         xs={false}
@@ -67,10 +66,9 @@ export const LogIn = () => {
           backgroundPosition: 'center',
         }}
       />
-      <Grid item xs={12} sm={8} md={7}>
+      <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square>
         <Box
           sx={{
-            position: 'relative',
             my: 8,
             mx: 4,
             display: 'flex',
@@ -82,24 +80,42 @@ export const LogIn = () => {
             <Lock />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Edit Profile
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
-            sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            onSubmit={handleUpdate}
+            sx={{
+              mt: 2,
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
           >
+            <TextField
+              type="text"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              name="name"
+              autoComplete="name"
+              defaultValue={user?.name}
+              autoFocus
+            />
             <TextField
               type="email"
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
               name="email"
               autoComplete="email"
+              defaultValue={user?.login}
               autoFocus
             />
+            <Typography sx={{ color: 'red', mt: 1 }}>{error}</Typography>
             <TextField
               margin="normal"
               required
@@ -110,17 +126,9 @@ export const LogIn = () => {
               id="password"
               autoComplete="current-password"
             />
-            <Typography sx={{ color: 'red', mt: 1 }}>{error}</Typography>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign In
+              Update
             </Button>
-            <Grid container>
-              <Grid item>
-                <Link variant="body2" component={RouterLink} to="/register">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Grid>

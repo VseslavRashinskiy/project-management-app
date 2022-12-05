@@ -17,7 +17,7 @@ type UserContextValue = [
   setUser: React.Dispatch<React.SetStateAction<User | null>>
 ];
 
-export const getUserById = async (id: string) => {
+const getUserById = async (id: string) => {
   const response = await axiosApiInstance.get<Omit<User, 'id'>>(__baseUrl__ + 'users/' + id);
   return response.data;
 };
