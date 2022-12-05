@@ -4,7 +4,7 @@ import { Language, mainState } from './constant';
 
 const NotFound = ({ language }: Language) => {
   return (
-    <div>
+    <div className="not-found">
       {language === 'EN' ? mainState[0].notFound : mainState[1].notFound}
       <Link to="/"> {language === 'EN' ? mainState[0].home : mainState[1].home}</Link>
     </div>
