@@ -4,11 +4,12 @@ import { Avatar, Button, CssBaseline, Grid, Paper, TextField, Typography } from 
 import { Box } from '@mui/system';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
-import { axiosApiInstance, userId, __baseUrl__ } from '../constant';
+import { axiosApiInstance, Language, userId, __baseUrl__ } from '../constant';
 import { useNavigate } from 'react-router-dom';
 import login from '../assets/image/login.png';
 import { useUser } from '../UserProvider';
 import { CreateUser, Error, ResponseLoginUser } from 'component/registration/Registration';
+import { mainState } from '../constant';
 
 export const updateUser = async (newUser: CreateUser) => {
   if (userId) {
@@ -20,7 +21,7 @@ export const updateUser = async (newUser: CreateUser) => {
   }
 };
 
-export const EditProfile = () => {
+export const EditProfile = ({ language }: Language) => {
   const [user] = useUser();
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -33,7 +34,11 @@ export const EditProfile = () => {
       password: data.get('password'),
     })
       .then(() => {
-        alert('Profile update');
+        {
+          language === 'EN'
+            ? alert(mainState[0].profileUpdateOk)
+            : alert(mainState[1].profileUpdateOk);
+        }
         navigate('/');
         window.location.reload();
       })
@@ -80,7 +85,7 @@ export const EditProfile = () => {
             <Lock />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Edit Profile
+            {language === 'EN' ? mainState[0].profileUpdate : mainState[1].profileUpdate}
           </Typography>
           <Box
             component="form"
@@ -127,7 +132,7 @@ export const EditProfile = () => {
               autoComplete="current-password"
             />
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Update
+              {language === 'EN' ? mainState[0].update : mainState[1].update}
             </Button>
           </Box>
         </Box>

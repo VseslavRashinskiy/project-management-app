@@ -4,10 +4,11 @@ import { Avatar, Button, Grid, Link, TextField, Typography } from '@mui/material
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/system';
 import axios, { AxiosError } from 'axios';
-import { __baseUrl__ } from '../constant';
+import { Language, __baseUrl__ } from '../constant';
 import login from '../assets/image/login.png';
 import { useState } from 'react';
 import { Error } from './Registration';
+import { mainState } from '../constant';
 
 type SignUser = {
   login: FormDataEntryValue | null;
@@ -24,7 +25,7 @@ export const signUser = async (user: SignUser) => {
   return response.data;
 };
 
-export const LogIn = () => {
+export const LogIn = ({ language }: Language) => {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +44,7 @@ export const LogIn = () => {
           const error = e as AxiosError<Error>;
           // Error 401
           if (error.response?.data.statusCode === 401) {
-            setError('Incorrect login or password' || null);
+            setError(language === 'EN' ? mainState[0].logErr : mainState[1].logErr || null);
           } else {
             // Error 400
             setError(error.response?.data.message || null);
@@ -82,7 +83,7 @@ export const LogIn = () => {
             <Lock />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            {language === 'EN' ? mainState[0].logIn : mainState[1].logIn}
           </Typography>
           <Box
             component="form"
@@ -95,7 +96,7 @@ export const LogIn = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={language === 'EN' ? mainState[0].email : mainState[1].email}
               name="email"
               autoComplete="email"
               autoFocus
@@ -105,19 +106,19 @@ export const LogIn = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={language === 'EN' ? mainState[0].password : mainState[1].password}
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <Typography sx={{ color: 'red', mt: 1 }}>{error}</Typography>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign In
+              {language === 'EN' ? mainState[0].logIn : mainState[1].logIn}
             </Button>
             <Grid container>
               <Grid item>
                 <Link variant="body2" component={RouterLink} to="/register">
-                  {"Don't have an account? Sign Up"}
+                  {language === 'EN' ? mainState[0].logQ : mainState[1].logQ}
                 </Link>
               </Grid>
             </Grid>

@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
+import { Language, mainState } from './constant';
 
-const NotFound = () => {
+const NotFound = ({ language }: Language) => {
   return (
     <div>
-      404 Page not found. Go <Link to="/">Home</Link>
+      {language === 'EN' ? mainState[0].notFound : mainState[1].notFound}
+      <Link to="/"> {language === 'EN' ? mainState[0].home : mainState[1].home}</Link>
     </div>
   );
 };

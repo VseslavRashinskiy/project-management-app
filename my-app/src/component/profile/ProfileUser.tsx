@@ -2,13 +2,14 @@ import React from 'react';
 import { Avatar, Button, Grid, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserProvider';
-import { axiosApiInstance, __baseUrl__ } from '../constant';
+import { axiosApiInstance, Language, __baseUrl__ } from '../constant';
 import avatarOut from '../assets/image/avatar1.png';
 import avatarDelete from '../assets/image/avatar2.png';
 import avatarEdit from '../assets/image/avatar3.png';
 import { Link as RouterLink } from 'react-router-dom';
+import { mainState } from '../constant';
 
-export const ProfileUser = () => {
+export const ProfileUser = ({ language }: Language) => {
   const navigate = useNavigate();
   const [user, setUser] = useUser();
   const exitProfile = () => {
@@ -17,7 +18,9 @@ export const ProfileUser = () => {
     navigate('/');
   };
   const deleteProfile = () => {
-    if (window.confirm('Are you sure you want to delete')) {
+    if (
+      window.confirm(language === 'EN' ? mainState[0].deleteProfileQ : mainState[1].deleteProfileQ)
+    ) {
       axiosApiInstance.delete(`${__baseUrl__}users/${user?._id}`);
       localStorage.clear();
       setUser(null);
@@ -29,7 +32,10 @@ export const ProfileUser = () => {
     <Grid container component={Paper} justifyContent="space-between" alignItems="center">
       <Grid item xs={4} md={4} display="flex" flexDirection="column" alignItems="center">
         <Avatar alt={user?.name} src={avatarOut} sx={{ width: '30%', height: '30%' }} />
-        <Button onClick={exitProfile}>sign out</Button>
+        <Button onClick={exitProfile}>
+          {' '}
+          {language === 'EN' ? mainState[0].signOut : mainState[1].signOut}
+        </Button>
       </Grid>
       <Grid item xs={4} md={4}>
         <Avatar alt={user?.name} src={avatarEdit} sx={{ width: '30%', height: '30%' }} />
@@ -42,13 +48,16 @@ export const ProfileUser = () => {
             }}
             to={`edit`}
           >
-            Edit profile
+            {language === 'EN' ? mainState[0].editProfile : mainState[1].editProfile}
           </RouterLink>
         </Button>
       </Grid>
       <Grid item xs={4} md={4}>
         <Avatar alt={user?.name} src={avatarDelete} sx={{ width: '30%', height: '30%' }} />
-        <Button onClick={deleteProfile}>Delete profile</Button>
+        <Button onClick={deleteProfile}>
+          {' '}
+          {language === 'EN' ? mainState[0].deleteProfile : mainState[1].deleteProfile}
+        </Button>
       </Grid>
     </Grid>
   );

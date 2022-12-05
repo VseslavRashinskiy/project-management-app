@@ -2,10 +2,7 @@ import { Grid, Link } from '@mui/material';
 import React from 'react';
 import rsSchool from '../assets/image/rs_school.svg';
 
-const dateTeam = [
-  { name: 'Aleksa', url: 'https://github.com/aleksa-mnk' },
-  { name: 'Vseslav Rashinskiy', url: 'https://github.com/VseslavRashinskiy' },
-];
+const dateTeam = [{ name: 'Vseslav Rashinskiy', url: 'https://github.com/VseslavRashinskiy' }];
 
 export const Footer = () => {
   return (

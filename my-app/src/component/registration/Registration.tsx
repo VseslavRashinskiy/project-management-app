@@ -13,9 +13,10 @@ import {
 import { Box } from '@mui/system';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
-import { __baseUrl__ } from '../constant';
+import { Language, __baseUrl__ } from '../constant';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import login from '../assets/image/login.png';
+import { mainState } from '../constant';
 
 export type CreateUser = {
   name: FormDataEntryValue | null;
@@ -37,7 +38,7 @@ export const createUser = async (user: CreateUser) => {
   return response.data;
 };
 
-export const Registration = () => {
+export const Registration = ({ language }: Language) => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const handleReg = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,7 +50,9 @@ export const Registration = () => {
       password: data.get('password'),
     })
       .then(() => {
-        alert('Регистрация прошла успешно');
+        {
+          language === 'EN' ? alert(mainState[0].regOk) : alert(mainState[1].regOk);
+        }
         navigate('/login');
       })
       .catch((e) => {
@@ -57,7 +60,7 @@ export const Registration = () => {
           const error = e as AxiosError<Error>;
           // Error 409
           if (error.response?.data.statusCode === 409) {
-            setError(error.response?.data.message || null);
+            setError(language === 'EN' ? mainState[0].regErr : mainState[1].regErr || null);
           } else {
             // Error 400
             setError(error.response?.data.message || null);
@@ -95,7 +98,7 @@ export const Registration = () => {
             <Lock />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Registration
+            {language === 'EN' ? mainState[0].reg : mainState[1].reg}
           </Typography>
           <Box
             component="form"
@@ -114,7 +117,7 @@ export const Registration = () => {
               required
               fullWidth
               id="name"
-              label="Name"
+              label={language === 'EN' ? mainState[0].name : mainState[1].name}
               name="name"
               autoComplete="name"
               autoFocus
@@ -125,7 +128,7 @@ export const Registration = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={language === 'EN' ? mainState[0].email : mainState[1].email}
               name="email"
               autoComplete="email"
               autoFocus
@@ -136,18 +139,18 @@ export const Registration = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={language === 'EN' ? mainState[0].password : mainState[1].password}
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Registration
+              {language === 'EN' ? mainState[0].reg : mainState[1].reg}
             </Button>
             <Grid container>
               <Grid item>
                 <Link href="#" variant="body2" component={RouterLink} to="/login">
-                  {'Registered? Sign in'}
+                  {language === 'EN' ? mainState[0].regQ : mainState[1].regQ}
                 </Link>
               </Grid>
             </Grid>

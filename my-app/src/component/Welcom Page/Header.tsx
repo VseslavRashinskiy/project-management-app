@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import {
   AppBar,
   Button,
@@ -13,6 +14,7 @@ import { Link, Link as RouterLink } from 'react-router-dom';
 import { Main } from './Main';
 import { Footer } from './Footer';
 import { useUser } from '../UserProvider';
+import { mainState } from '../constant';
 import withAuth from '../WithAuth';
 
 type NavMenuItemProps = {
@@ -30,17 +32,23 @@ const PrivateNavMenuItem = withAuth(NavMenuItem);
 
 export default function Header() {
   const [user] = useUser();
+  const [language, setLanguage] = useState(localStorage.getItem('language') as string);
 
-  const data = [{ name: 'Create new board', path: '/statistic', isPrivate: true }];
+  const data = {
+    nameEN: 'Create new board',
+    nameRU: 'Создать новую доску',
+    path: '/statistic',
+    isPrivate: true,
+  };
 
   const getList = () => (
-    <>
-      {data.map((item) => (
-        <div key={item.name}>
-          {item.isPrivate ? <PrivateNavMenuItem path={item.path} name={item.name} /> : <></>}
-        </div>
-      ))}
-    </>
+    <div>
+      {data.isPrivate ? (
+        <PrivateNavMenuItem path={data.path} name={language === 'EN' ? data.nameEN : data.nameRU} />
+      ) : (
+        <></>
+      )}
+    </div>
   );
 
   return (
@@ -60,6 +68,20 @@ export default function Header() {
                 App
               </RouterLink>
             </Typography>
+            <Button
+              color="inherit"
+              onClick={() => {
+                if (localStorage.getItem('language') === 'EN') {
+                  localStorage.setItem('language', 'RU');
+                  setLanguage(localStorage.getItem('language') as string);
+                } else {
+                  localStorage.setItem('language', 'EN');
+                  setLanguage(localStorage.getItem('language') as string);
+                }
+              }}
+            >
+              {localStorage.getItem('language') ? language : 'RU'}
+            </Button>
             {getList()}
             {user ? (
               <Button
@@ -87,7 +109,7 @@ export default function Header() {
                     }}
                     to={`login`}
                   >
-                    Log In
+                    {language === 'EN' ? mainState[0].logIn : mainState[1].logIn}
                   </RouterLink>
                 </Button>
                 <Button color="inherit">
@@ -98,7 +120,7 @@ export default function Header() {
                     }}
                     to={`register`}
                   >
-                    Sign Up
+                    {language === 'EN' ? mainState[0].reg : mainState[1].reg}
                   </RouterLink>
                 </Button>
               </>
@@ -106,7 +128,7 @@ export default function Header() {
           </Toolbar>
         </AppBar>
       </Box>
-      <Main />
+      <Main language={language} />
       <Footer />
     </div>
   );
