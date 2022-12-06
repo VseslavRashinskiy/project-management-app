@@ -38,7 +38,7 @@ export const AboutUs = ({ language }: Language) => {
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ p: 2, textAlign: 'center' }}>
               {' '}
-              {language === 'EN' ? mainState[0].desriptionMe : mainState[1].desriptionMe}
+              {language === 'EN' ? mainState[0].discriptionMe : mainState[1].discriptionMe}
             </Typography>
           </Grid>
         </Grid>

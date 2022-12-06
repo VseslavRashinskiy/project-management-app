@@ -25,3 +25,9 @@
         @include flex(column, center, center, 0px);
     }
 }
+
+@media only screen and (max-width: 500px) {
+  .welcome__main {
+      margin-top: 50px;
+  }
+}

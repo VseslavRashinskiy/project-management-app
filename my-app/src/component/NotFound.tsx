@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { CssBaseline, Grid, Paper, Typography } from '@mui/material';
-import { Box } from '@mui/system';
 import { Language, mainState } from './constant';
-import image from './assets/image/404.png';
-import imageErr from './assets/image/404-page.png';
 
 const NotFound = ({ language }: Language) => {
   return (

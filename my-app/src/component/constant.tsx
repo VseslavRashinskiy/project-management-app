@@ -23,7 +23,7 @@ export const mainState = [
     deleteProfileQ: 'Are you sure you want to delete?',
     signOut: 'Sign Out',
     update: 'Update',
-    desriptionMe:
+    discriptionMe:
       "The boss of the project, a great progrmist, the guy is great! And what a sense of humor, it's amazing.",
     team: 'Me',
     titleMe: 'Vseslav Rashinskiy',
@@ -42,7 +42,7 @@ export const mainState = [
     logQ: 'У вас нет учетной записи? Зарегистрируйтесь',
     notFound: '404 Страница не найдена',
     titleMe: 'Всеслав Ращинский',
-    descriptionMe:
+    discriptionMe:
       'Босс проекта, отличный прогрммист, парень просто супер! А какое чувство юмора, обалдеть можно.',
     home: 'Главная',
     regOk: 'Регистрация прошла успешно',

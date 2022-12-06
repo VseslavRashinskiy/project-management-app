@@ -22,3 +22,12 @@
         }
     }
 }
+
+@media only screen and (max-width: 500px) {
+  .header {
+      height: 120px;
+  }
+  .header__nav {
+      @include flex(column, center, space-between, 0px);
+  }
+}

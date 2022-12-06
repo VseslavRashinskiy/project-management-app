@@ -22,7 +22,6 @@ const Placeholder = ({ language }: Language) => (
       </Typography>
     </div>
     <CardMedia component="img" image={mainImg} alt="main-img" />
-    <AboutUs language={language}></AboutUs>
   </>
 );
 
