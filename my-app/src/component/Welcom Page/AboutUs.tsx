@@ -6,6 +6,7 @@ import me from '../assets/image/LP.png';
 export const AboutUs = ({ language }: Language) => {
   return (
     <Grid
+      className="about"
       sx={{
         display: 'flex',
         alignItems: 'center',
@@ -13,11 +14,15 @@ export const AboutUs = ({ language }: Language) => {
       }}
       gap={1}
     >
-      <Typography fontSize={'3rem'} sx={{ p: 5 }}>
+      <Typography fontSize={'2rem'}>
         {language === 'EN' ? mainState[0].team : mainState[1].team}
       </Typography>
       <>
-        <Grid container sx={{ border: '1px solid #1976D2', borderRadius: '10px' }}>
+        <Grid
+          className="about"
+          container
+          sx={{ border: '1px solid #1976D2', borderRadius: '10px' }}
+        >
           <Grid sx={{ p: 2, width: '15%' }}>
             <CardMedia
               component="img"
@@ -29,7 +34,7 @@ export const AboutUs = ({ language }: Language) => {
           <Grid item sx={{ p: 2, width: '85%' }}>
             <Typography
               gutterBottom
-              variant="h5"
+              variant="subtitle1"
               component="div"
               sx={{ textAlign: 'center', fontSize: '2rem' }}
             >
@@ -38,7 +43,7 @@ export const AboutUs = ({ language }: Language) => {
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ p: 2, textAlign: 'center' }}>
               {' '}
-              {language === 'EN' ? mainState[0].desriptionMe : mainState[1].desriptionMe}
+              {language === 'EN' ? mainState[0].discriptionMe : mainState[1].discriptionMe}
             </Typography>
           </Grid>
         </Grid>

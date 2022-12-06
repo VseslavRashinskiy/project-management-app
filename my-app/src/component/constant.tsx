@@ -10,7 +10,7 @@ export const mainState = [
     logIn: 'Log in',
     logErr: 'Incorrect login or password',
     logQ: "Don't have an account? Sign Up",
-    notFound: 'Page not found. Go',
+    notFound: '404 Page not found',
     home: 'Home',
     regOk: 'Registration was successful',
     regErr: 'Login already exist',
@@ -23,7 +23,7 @@ export const mainState = [
     deleteProfileQ: 'Are you sure you want to delete?',
     signOut: 'Sign Out',
     update: 'Update',
-    desriptionMe:
+    discriptionMe:
       "The boss of the project, a great progrmist, the guy is great! And what a sense of humor, it's amazing.",
     team: 'Me',
     titleMe: 'Vseslav Rashinskiy',
@@ -40,9 +40,9 @@ export const mainState = [
 
     logErr: 'Неправильный логин или пароль',
     logQ: 'У вас нет учетной записи? Зарегистрируйтесь',
-    notFound: 'Страница не найдена. Перейти',
+    notFound: '404 Страница не найдена',
     titleMe: 'Всеслав Ращинский',
-    descriptionMe:
+    discriptionMe:
       'Босс проекта, отличный прогрммист, парень просто супер! А какое чувство юмора, обалдеть можно.',
     home: 'Главная',
     regOk: 'Регистрация прошла успешно',

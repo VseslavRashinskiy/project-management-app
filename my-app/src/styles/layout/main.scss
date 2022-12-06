@@ -1,0 +1,38 @@
+.welcome {
+    min-height: 100vh;
+    @include flex(column, center, space-between, 0px);
+    background: radial-gradient(78.62% 78.62% at 50.21% 49.69%, rgba(161, 221, 255, 0) 0%, #56B8FF 88.33%);
+    &__main {
+        flex-grow: 1;
+        max-width: 1200px;
+        min-width: 100%;
+        @include flex(column, center, space-between, 20px);
+        margin-top: 60px;
+        &-about {
+            color: #00004b;
+            font-family: 'Arimo', Arial, Helvetica, sans-serif;
+            padding: 0px 0px 0px 30px;
+            @include flex(column, top, space-between, 20px);
+        }
+        img {
+            max-width: 600px;
+        }
+    }
+}
+
+.about {
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 1000px) {
+    .welcome__main {
+        padding-top: 100px;
+        @include flex(column, center, center, 0px);
+    }
+}
+
+@media only screen and (max-width: 500px) {
+  .welcome__main {
+      margin-top: 50px;
+  }
+}

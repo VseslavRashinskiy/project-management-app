@@ -1,0 +1,33 @@
+.header {
+    height: 50px;
+    background: rgba(244, 248, 255, 0.02) !important;
+    backdrop-filter: blur(20px);
+    height: 50px;
+    @include flex(row, center, space-between, 0px);
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    font-size: 22px;
+    position: sticky;
+    padding: 0px 20px;
+    width: 100%;
+
+    a {
+        color: #ffffff;
+    }
+
+    &__nav {
+        @include flex(row, center, space-between, 10px);
+        & a {
+            color: #ffffff !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+  .header {
+      height: 120px;
+  }
+  .header__nav {
+      @include flex(column, center, space-between, 0px);
+  }
+}
