@@ -1,0 +1,46 @@
+.footer {
+    height: 60px;
+    min-width: 100% !important;
+    padding: 0px 20px;
+    background-color: #4F6FA4;
+    @include flex(row, center, space-between, 10px);
+    font-family: $main-font;
+    font-size: 16px;
+    padding: 0px 20px;
+    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.15);
+
+    &__git {
+        @include flex(row, center, space-between, 10px);
+    }
+    &__rs {
+        height: 40px;
+    }    
+
+    > * {
+        filter: invert(81%) sepia(62%) saturate(261%) hue-rotate(202deg) brightness(100%) contrast(104%);
+    }
+    p {
+        width: 120px;
+        text-align: right;
+    }
+}
+
+.git__img {
+    background-image: url(https://cdn-icons-png.flaticon.com/512/25/25231.png);
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .footer {
+      height: 120px;
+      p {
+        text-align: center;
+      }
+      @include flex(column, center, center, 10px);
+      &__href {
+        order: -1;
+        }
+    }
+}

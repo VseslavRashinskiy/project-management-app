@@ -1,0 +1,23 @@
+.not-found {
+    color: #5e3eaf;
+    font-size: 3em;
+    line-height: 6rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+    @include flex(column, center, space-between, 20px);
+    margin: 0 auto;
+
+    a {
+        background-color: #4f70a49e;
+        color: #fefefe;
+        padding: 5px 20px;
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .not-found {
+        font-size: 2em;
+        line-height: 3rem;
+    }
+}
