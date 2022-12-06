@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button, Grid, Paper } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../UserProvider';
 import { axiosApiInstance, Language, __baseUrl__ } from '../constant';

@@ -6,7 +6,8 @@
         flex-grow: 1;
         max-width: 1200px;
         min-width: 100%;
-        @include flex(row, center, space-between, 20px);
+        @include flex(column, center, space-between, 20px);
+        margin-top: 60px;
         &-about {
             color: #00004b;
             font-family: 'Arimo', Arial, Helvetica, sans-serif;
@@ -17,6 +18,10 @@
             max-width: 600px;
         }
     }
+}
+
+.about {
+  flex-grow: 1;
 }
 
 @media only screen and (max-width: 1000px) {
