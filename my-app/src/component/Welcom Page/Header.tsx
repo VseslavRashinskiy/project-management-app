@@ -8,6 +8,7 @@ import { Footer } from './Footer';
 import { useUser } from '../UserProvider';
 import { mainState } from '../constant';
 import withAuth from '../WithAuth';
+import { AboutUs } from './AboutUs';
 
 type NavMenuItemProps = {
   path: string;
